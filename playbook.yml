@@ -1,0 +1,15 @@
+---
+- name: Install Telegraf
+  hosts: all
+  tasks: 
+    - name: install influx gpg key
+      become: yes
+      rpm_key:
+        key: "https://repos.influxdata.com/influxdb.key"
+        state: present
+
+    - name: install telegraf packages
+      become: yes
+      yum:
+        name: /tmp/telegraf-1.13.4-1.x86_64.rpm
+        state: present
